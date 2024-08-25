@@ -47,6 +47,6 @@ public class DeckResults {
      * 集計データを勝率でソートする
      */
     public void sortByWinrate() {
-        this.deckResults.sort(Comparator.comparing(DeckResult::getWinrate));
+        this.deckResults.sort(Comparator.comparing(DeckResult::getWinrate).reversed());
     }
 }

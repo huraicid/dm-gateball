@@ -55,8 +55,7 @@
         <td th:text="*{name}"></td>
         <td th:text="*{winCount}"></td>
         <td th:text="*{lossCount}"></td>
-        <!-- なぜか0.xx表記になる。。。 ので応急処置-->
-        <td th:text="*{winrate * 100} + '%'"></td>
+        <td th:text="${#numbers.formatPercent({item.winrate}, 2, 2)}"></td>
       </tr>
       </tbody>
     </table>
