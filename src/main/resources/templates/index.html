@@ -5,13 +5,55 @@
       layout:decorate="~{layout/layout}"
 >
 <head>
-  <title>トップページ</title>
+  <title>Top Page</title>
 </head>
 <body>
 <section layout:fragment="content">
   <div class="text-center">
-    <h1 class="h1">タスク管理のお手伝いをします</h1>
-    <p>タスク一覧から始めてください！</p>
+    <h1 class="h1">DM-Gate ball</h1>
+    <p>昔のスーパーデッキの対戦記録</p>
+  </div>
+
+  <div>
+    <h1 class="h1 mt-3">Deck List</h1>
+
+    <table class="table table-hover">
+      <thead class="table-light">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="deck : ${deckList}" th:object="${deck}">
+        <td th:text="*{id}"></td>
+        <td th:text="*{name}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <h1 class="h1 mt-3">Results</h1>
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Deck Name</th>
+        <th>Wins</th>
+        <th>Losses</th>
+        <th>Winrate</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="task : ${taskList}" th:object="${task}">
+        <td><a th:href="@{/tasks/{id}(id=*{id})}" th:text="'#' + *{id}"></a></td>
+        <td><a th:href="@{/tasks/{id}(id=*{id})}" th:text="*{summary}"></a></td>
+        <td th:text="*{status}"></td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </section>
 </body>
