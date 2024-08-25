@@ -1,5 +1,6 @@
 package dmgateball.service.deck;
 
+import dmgateball.record.Deck;
 import dmgateball.repository.deck.DeckRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

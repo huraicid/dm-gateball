@@ -1,6 +1,6 @@
 package dmgateball.repository.deck;
 
-import dmgateball.service.deck.Deck;
+import dmgateball.record.Deck;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

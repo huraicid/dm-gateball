@@ -14,6 +14,7 @@
     <p>昔のスーパーデッキの対戦記録</p>
   </div>
 
+  <!-- デッキリスト -->
   <div>
     <h1 class="h1 mt-3">Deck List</h1>
 
@@ -33,11 +34,12 @@
     </table>
   </div>
 
+  <!-- 勝敗データ表 -->
   <div>
     <h1 class="h1 mt-3">Results</h1>
 
     <table class="table">
-      <thead>
+      <thead class="table-light">
       <tr>
         <th>Rank</th>
         <th>Deck Name</th>
@@ -47,10 +49,14 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="task : ${taskList}" th:object="${task}">
-        <td><a th:href="@{/tasks/{id}(id=*{id})}" th:text="'#' + *{id}"></a></td>
-        <td><a th:href="@{/tasks/{id}(id=*{id})}" th:text="*{summary}"></a></td>
-        <td th:text="*{status}"></td>
+      <tr th:each="item, iterStat : ${results}" th:object="${item}"
+          th:with="incrementedValue=${iterStat.index + 1}">
+        <td th:text="${incrementedValue}"></td>
+        <td th:text="*{name}"></td>
+        <td th:text="*{winCount}"></td>
+        <td th:text="*{lossCount}"></td>
+        <!-- なぜか0.xx表記になる。。。 ので応急処置-->
+        <td th:text="*{winrate * 100} + '%'"></td>
       </tr>
       </tbody>
     </table>
