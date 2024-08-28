@@ -7,21 +7,18 @@ import jakarta.validation.constraints.PositiveOrZero;
 import java.time.LocalDate;
 
 public record RegisterForm(
-        @NotBlank
         @PastOrPresent
         LocalDate date,
 
         @NotBlank
-        String homeDeckName,
+        String homeDeckId,
 
-        @NotBlank
         @PositiveOrZero
         int homeWin,
 
         @NotBlank
-        String awayDeckName,
+        String awayDeckId,
 
-        @NotBlank
         @PositiveOrZero
         int awayWin
 ) {

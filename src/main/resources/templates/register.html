@@ -17,7 +17,7 @@
         <div class="row justify-content-md-center">
             <div id="dateInput" class="col-auto">
                 <label for="date" class="form-label">Date</label>
-                <input type="date" id="date" name="date" class="form-control">
+                <input type="date" id="date" th:value="${form.date}" name="date" class="form-control">
             </div>
         </div>
 
@@ -27,12 +27,12 @@
                     Home
                 </div>
                 <div>
-                    <select id="homeDeck" class="form-control text-center mt-2">
+                    <select id="homeDeck" name="homeDeckId" class="form-control text-center mt-2">
                         <option th:each="item : ${deckList}" th:value="${item.id}" th:text="${item.name}"></option>
                     </select>
                 </div>
-                <div class="col-md-2 mt-2 mx-auto">
-                    <input type="number" value="0" min="0" max="1" id="homeWin" class="form-control text-center">
+                <div class="col-md-3 mt-2 mx-auto">
+                    <input type="number" id="homeWin" name="homeWin" value="0" min="0" max="1" class="form-control text-center">
                 </div>
             </div>
             <div class="col-1 d-flex align-items-center justify-content-center">
@@ -43,12 +43,12 @@
                     Away
                 </div>
                 <div>
-                    <select id="awayDeck" class="form-control text-center mt-2">
+                    <select id="awayDeck" name="awayDeckId"  class="form-control text-center mt-2">
                         <option th:each="item : ${deckList}" th:value="${item.id}" th:text="${item.name}"></option>
                     </select>
                 </div>
-                <div class="col-md-2 mt-2 mx-auto">
-                    <input type="number" value="0" min="0" max="1" id="awayWin" class="form-control text-center">
+                <div class="col-md-3 mt-2 mx-auto">
+                    <input type="number" id="awayWin" name="awayWin" value="0" min="0" max="1" class="form-control text-center">
                 </div>
             </div>
         </div>

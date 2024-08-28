@@ -18,7 +18,7 @@ public interface ShowLogRepository {
             FROM battle_results br
             JOIN decks dc_home on br.home_id = dc_home.id
             JOIN decks dc_away on br.away_id = dc_away.id
-            ORDER BY br.date, br.battle_id DESC
+            ORDER BY br.date DESC, br.battle_id DESC
             """)
     List<BattleLogWithDeckName> getLogs();
 }
