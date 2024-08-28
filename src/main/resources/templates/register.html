@@ -14,7 +14,14 @@
     </div>
 
     <form th:action="@{/register}" method="post" class="mt-5">
-        <div class="row row-cols-3 justify-content-md-center">
+        <div class="row justify-content-md-center">
+            <div id="dateInput" class="col-auto">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" id="date" name="date" class="form-control">
+            </div>
+        </div>
+
+        <div class="row row-cols-3 justify-content-md-center mt-2">
             <div id="home" class="col-sm-5 border pb-2 center-block">
                 <div class="text-center fw-bold">
                     Home
