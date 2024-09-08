@@ -5,13 +5,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Setter
+@Getter
 public class StandingsCell {
     private static final double WINRATE_ERROR_VALUE = -1.0;
 
     /**
      * 対戦相手のデッキID
      */
-    @Getter
     private String opponentDeckId;
 
     /**
