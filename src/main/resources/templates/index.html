@@ -5,63 +5,98 @@
       layout:decorate="~{layout/layout}"
 >
 <head>
-  <title>Top Page</title>
+    <title>Top Page</title>
+    <style>
+        @media (max-width:700px) {
+            .table-large {
+                width: 700px
+            }
+        }
+        td.same {
+            background-color: #D3D3D3; /* 灰色 */
+        }
+        td.advantage {
+            background-color: #CCFFFF /* 薄い青 */
+        }
+        .sticky {
+            position: sticky;
+            top: 0;
+            left: 0;
+            background: none;
+            border-left: none;
+            border-right: none;
+        }
+        .sticky::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ccc;
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
 <section layout:fragment="content">
-  <div class="text-center">
-    <h1 class="h1">DM-Gate ball</h1>
-    <p>昔のスーパーデッキの対戦記録</p>
-  </div>
+    <div class="text-center">
+        <h1 class="h1">DM-Gate ball</h1>
+        <p>昔のスーパーデッキの対戦記録</p>
+    </div>
 
-  <!-- デッキリスト -->
-  <!--
-  <div>
-    <h1 class="h1 mt-3">Deck List</h1>
+    <!-- 勝敗データ表 -->
+    <div>
+        <h1 class="h1 mt-3">Result Summaries</h1>
 
-    <table class="table table-hover">
-      <thead class="table-light">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="deck : ${deckList}" th:object="${deck}">
-        <td th:text="*{id}"></td>
-        <td th:text="*{name}"></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  -->
+        <table class="table table-hover">
+            <thead class="table-light">
+            <tr>
+                <th>Rank</th>
+                <th>Deck Name</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Winrate</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item, iterStat : ${results}" th:object="${item}"
+                th:with="incrementedValue=${iterStat.index + 1}">
+                <td th:text="${incrementedValue}"></td>
+                <td th:text="*{name}"></td>
+                <td th:text="*{winCount}"></td>
+                <td th:text="*{lossCount}"></td>
+                <td th:text="${#numbers.formatPercent({item.winrate}, 2, 2)}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-  <!-- 勝敗データ表 -->
-  <div>
-    <h1 class="h1 mt-3">Result Summaries</h1>
+    <!-- 勝敗表 -->
+    <div class="table-responsive">
+        <h1 class="h1 mt-3">Standings</h1>
 
-    <table class="table table-hover">
-      <thead class="table-light">
-      <tr>
-        <th>Rank</th>
-        <th>Deck Name</th>
-        <th>Wins</th>
-        <th>Losses</th>
-        <th>Winrate</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="item, iterStat : ${results}" th:object="${item}"
-          th:with="incrementedValue=${iterStat.index + 1}">
-        <td th:text="${incrementedValue}"></td>
-        <td th:text="*{name}"></td>
-        <td th:text="*{winCount}"></td>
-        <td th:text="*{lossCount}"></td>
-        <td th:text="${#numbers.formatPercent({item.winrate}, 2, 2)}"></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+        <table class="table table-large table-hover" style="table-layout: fixed">
+            <thead class="table-light">
+            <tr>
+                <th> </th>
+                <th th:each="deck : ${deckList}" th:text="${deck.name}" style="font-size: 90%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row, rowCount : ${standings}"
+                th:with="incrementedValue=${rowCount.index}"
+                style="font-size: 90%">
+                <td th:text="${deckList[rowCount.index].name}" class="sticky"></td>
+                <td th:each="item, colCount : ${row}"
+                    th:with="incrementedValue=${colCount.index}"
+                    th:classappend="${rowCount.index == colCount.index ? 'same' : item.winrate > 0.5 ? 'advantage' : ''}"
+                    th:text="${rowCount.index == colCount.index ? '' : item.winrate == -1.0 ? '-' : item.winCount + '-' + item.lossCount}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </section>
 </body>
 </html>
