@@ -7,7 +7,7 @@
 <head>
     <title>Top Page</title>
     <style>
-        @media (max-width:700px) {
+        @media (max-width:1000px) {
             /** スマホなどで閲覧する際、テーブルをスクロール可能にする **/
             .table-large {
                 width: 700px;
@@ -28,8 +28,7 @@
             background-color: #CCFFFF /* 薄い青 */
         }
         .standing-winrate {
-            font-weight: bold;
-            font-size: 1.2em
+            font-weight: bold
         }
         .standing-winlose {
             font-size: 0.8em
@@ -57,6 +56,10 @@
             width: 100%;
             height: 100%;
             z-index: -1;
+        }
+        .table-first-row {
+            height: 6em;
+            line-height: 150%
         }
     </style>
 </head>
@@ -103,9 +106,9 @@
         </p>
 
         <!-- 勝敗表本体 -->
-        <div class="table-responsive table-height-scrollable">
+        <div class="table-height-scrollable">
             <table class="table table-large table-hover" style="table-layout: fixed">
-                <thead class="table-light">
+                <thead class="table-light" style="font-size:80%">
                 <tr>
                     <th class="sticky"></th>
                     <th class="sticky" th:each="deck : ${deckList}" th:text="${deck.name}" style="font-size: 90%"></th>
@@ -115,7 +118,7 @@
                 <tr th:each="row, rowCount : ${standings}"
                     th:with="incrementedValue=${rowCount.index}"
                     style="font-size: 90%">
-                    <td th:text="${deckList[rowCount.index].name}" class="sticky"></td>
+                    <td th:text="${deckList[rowCount.index].name}" class="sticky table-first-row"></td>
                     <td th:each="item, colCount : ${row}"
                         th:with="incrementedValue=${colCount.index},
                                 isSameDeck=${rowCount.index == colCount.index},
