@@ -110,9 +110,12 @@
                     style="font-size: 90%">
                     <td th:text="${deckList[rowCount.index].name}" class="sticky"></td>
                     <td th:each="item, colCount : ${row}"
-                        th:with="incrementedValue=${colCount.index}"
-                        th:classappend="${rowCount.index == colCount.index ? 'same' : item.winrate > 0.5 ? 'advantage' : ''}"
-                        th:text="${rowCount.index == colCount.index ? '' : item.winrate == -1.0 ? '-' : item.winCount + '-' + item.lossCount}">
+                        th:with="incrementedValue=${colCount.index},
+                                isSameDeck=${rowCount.index == colCount.index},
+                                isExistResult=${!isSameDeck && (item.winrate != -1.0)},
+                                displayText=${isExistResult ? (item.winCount + '-' + item.lossCount) : ''}"
+                        th:classappend="${isSameDeck ? 'same' : (item.winrate > 0.5 ? 'advantage' : '')}"
+                        th:text="${displayText}">
                     </td>
                 </tr>
                 </tbody>
