@@ -27,6 +27,13 @@
         td.advantage {
             background-color: #CCFFFF /* 薄い青 */
         }
+        .standing-winrate {
+            font-weight: bold;
+            font-size: 1.2em
+        }
+        .standing-winlose {
+            font-size: 0.8em
+        }
         .table-height-scrollable tr:first-child th:first-child {
             z-index: 1;
         }
@@ -113,9 +120,11 @@
                         th:with="incrementedValue=${colCount.index},
                                 isSameDeck=${rowCount.index == colCount.index},
                                 isExistResult=${!isSameDeck && (item.winrate != -1.0)},
-                                displayText=${isExistResult ? (item.winCount + '-' + item.lossCount) : ''}"
+                                displayWinrate=${'<div class=&quot;standing-winrate&quot;>' + #numbers.formatDecimal(item.winrate * 100, 1, 2) + '%' + '</div>'},
+                                displayWinLose=${'<div class=&quot;standing-winlose&quot;>' + item.winCount + '-' + item.lossCount + '</div>'},
+                                displayTextIfExists=${displayWinrate + displayWinLose}"
                         th:classappend="${isSameDeck ? 'same' : (item.winrate > 0.5 ? 'advantage' : '')}"
-                        th:text="${displayText}">
+                        th:utext="${isExistResult ? displayTextIfExists : ''}">
                     </td>
                 </tr>
                 </tbody>
