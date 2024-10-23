@@ -8,13 +8,13 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan
-public class TodoApplication extends SpringBootServletInitializer {
+public class DmGateballApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
-		SpringApplication.run(TodoApplication.class, args);
+		SpringApplication.run(DmGateballApplication.class, args);
 	}
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(TodoApplication.class);
+		return application.sources(DmGateballApplication.class);
 	}
 }
